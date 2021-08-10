@@ -1,0 +1,27 @@
+{%extends 'base.html'%}
+{%block content%}
+{%load static%}
+
+
+<style>
+    input{
+    border: 2px solid red;
+    border-radius: 10px;
+    width:250px;
+     }
+
+</style>
+<form method="post">
+{%if user.is_authenticated%}
+
+<div class="container">
+{%csrf_token%}
+    {{form.media}}
+    {{form.as_p}}
+      <button class="btn btn-success">POST</button>
+<br>
+    {%else%}</div>
+  <br><br><br><br>
+<h1>Ooops! ONLY ADMINS ARE ALLOWED</h1>
+{%endif%}
+    {%endblock%}</form>
