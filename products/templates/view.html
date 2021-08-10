@@ -8,13 +8,12 @@
                             <img src="{{item.img_url}}" height="400px; width:500px">
                         </div>
      <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 margin">
-                                     <button class="btn btn-danger"><a style="font-family:sans-serif" href="{{item.get_add_to_cart_url}}"><img src="{%static 'images/cart.png'%}" style="height:30px; width:30px">Add to cart</a> </button>
-                                                        <button class="btn btn-danger"><a style="font-family:sans-serif" href="{{item.get_remove_from_cart_url}}"><img src="{%static 'images/cart.png'%}" style="height:30px; width:30px">Remove from cart</a> </button>
+                                     <button class="btn btn-warning"><a style="font-family:sans-serif" href="{{item.get_add_to_cart_url}}"><img src="{%static 'images/cart.png'%}" style="height:30px; width:30px">Add to cart</a> </button>
 
          <h5><b style="color:black">Price:</b></h5>
             <p>
          {%if item.discount%}
-             formerly:<strike style="color:red">{{item.price}}</strike>      {{item.discount}}
+             formerly:<strike style="color:red">{{item.price}}</strike>    -  {{item.discount}}
             </p>
                                 {%else%}
              {{item.price}}
