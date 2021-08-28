@@ -1,0 +1,35 @@
+{%extends 'base.html'%}
+{%block content%}
+{%load static%}
+{%if items%}
+<br>
+{%for i in items %}
+
+
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 margin">
+                        <div class="brand_box">
+
+                            <img src="{{i.img_url}}" alt="img" />
+                            <a href="" style="position:relative;height:30px; width:50px; top:-150px;" class="badge badge-{{item.get_label_display}}"><h5>{{i.get_category_display}}</h5></a>
+                            <h3>#<strong class="red">
+                                {%if i.discount%}
+                                {{i.discount}}
+                                {%else%}
+                                {{i.price}}
+                                {%endif%}
+                            </strong></h3>
+                            <span class="badge badge-pill {{item.get_label_display}}"></span>
+                            <span>{{item.name}}</span>
+
+
+                            <button class="btn btn-primary"><a style="color:white" href="{%url 'view' i.pk%}">View </a></button>
+
+                        </div>
+                    </div>
+
+
+{%endfor%}
+{%else%}
+<h1>No results found</h1>
+{%endif%}
+{%endblock%}

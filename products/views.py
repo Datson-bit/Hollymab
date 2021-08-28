@@ -4,26 +4,95 @@ from email import message
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import ObjectDoesNotExist
+from django.db.models import Q
 from django.utils import timezone
-from django.views.generic import ListView, DetailView, CreateView
-from .models import Product, Item,OrderItem, Staff, Carousel, Order
+from django.views.generic import ListView,View, DetailView, CreateView
+
+from . import forms
+from .forms import CheckoutForm, PaymentForm
+from .models import Product, Item, OrderItem, Staff, Carousel, Order, BillingAddress, Payment
 from django.core.mail import send_mail, BadHeaderError
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, HttpRequest
 from django.shortcuts import render, redirect, get_object_or_404
 from django.conf import settings
 
+
 def Home(request):
     if request.method == "POST":
-        message_name = request.POST['message-name']
-        message_email = request.POST['message-email']
-        message = request.POST['message']
-
-        send_mail(message_name, message, message_email, ['dulmzonecoders@gmail.com'])
-        return render(request, 'contact.html', {'message_name': message_name})
+        remark_form= forms.RemarkForm(request.POST, user=request.user)
+        if remark_form.is_valid():
+            remark= remark_form.save()
+        return render(request, 'index.html', {'remark': remark})
     else:
         product = Product.objects.all()
         carousel= Carousel.objects.all()
         return render(request, 'index.html', {'product': product, 'carousel':carousel })
+
+
+def initiate_payment(request: HttpRequest) -> HttpResponse:
+    if request.method == "POST":
+        payment_form= forms.PaymentForm(request.POST)
+        if payment_form.is_valid():
+            order = Order.objects.get(user=request.user, ordered=False)
+            payment = payment_form.save()
+            return render(request, 'payment.html', {'payment': payment,'object':order, 'paystack_public_key' : settings.PAYSTACK_PUBLIC_KEY})
+
+    else:
+        order = Order.objects.get(user=request.user, ordered=False)
+        payment_form = forms.PaymentForm()
+    return render(request, 'initiate_payment.html', {'object':order,'payment_form':payment_form})
+
+    return render(request, 'payment.html')
+
+
+
+def verify_payment(request: HttpRequest, ref:str)-> HttpResponse:
+    payment = get_object_or_404(Payment, ref=ref)
+    verified= payment.verify_payment()
+    if verified:
+        messages.success(request, "verification Successful")
+        return render(request, 'verify.html')
+    else:
+        messages.error(request, "verification failed")
+    return redirect('initiate-payment')
+
+class CheckoutView(View):
+    def get(self, *args, **kwargs):
+        form= CheckoutForm()
+        return render(self.request, 'checkout.html', {'form':form})
+
+    def post(self, *args, **kwargs):
+        form = CheckoutForm(self.request.POST or None)
+        try:
+            order = Order.objects.get(user=self.request.user, ordered=False)
+            if form.is_valid():
+                street_address = form.cleaned_data.get('street_address')
+                apartment_address = form.cleaned_data.get('apartment_address')
+                country = form.cleaned_data.get('country')
+                zip = form.cleaned_data.get('zip')
+                # TODO: add functionality to these fields
+                #same_shipping_address = form.cleaned_data['same_billing_address']
+                #save_info = form.cleaned_data['save_info']
+
+                payment_option = form.cleaned_data.get('payment_option')
+                billing_address = BillingAddress(
+                    user=self.request.user,
+                    street_address=street_address,
+                    apartment_address=apartment_address,
+                    country=country,
+                    zip=zip,
+                )
+                billing_address.save()
+                order.billing_address= billing_address
+                order.save()
+                # TODO: add a redirect to the selected option
+                return redirect("initiate-payment")
+            messages.warning(self.request, "failed Checkout")
+            return redirect("checkout")
+        except ObjectDoesNotExist:
+            messages.error(self.request, "You do not have an active order")
+            return redirect("order-summary")
+
 
 def contact(request):
     if request.method == "POST":
@@ -66,6 +135,13 @@ class AddAll(CreateView):
     model = Item
     template_name = 'add_products.html'
     fields = '__all__'
+
+
+def Terms(request):
+    return render(request, 'terms.html')
+
+def Privacy(request):
+    return render(request,'Privacy.html')
 
 
 class OrderSummaryView(LoginRequiredMixin, View):
@@ -169,3 +245,9 @@ def remove_single_item_from_cart(request, pk):
         messages.info(request, "You do not have an order.")
     return redirect("view", pk=pk)
 
+
+def search(request):
+    if request.method == 'GET':
+        searched= request.GET.get('searched')
+        items= Item.objects.all().filter(name=searched)
+        return render(request, 'search_results.html', { 'items':items})

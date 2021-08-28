@@ -7,6 +7,14 @@
 <!--        height:290px;-->
 <!--    }-->
 <!--    }-->
+    #infodown{
+        background: #efeff0;
+        padding: 30px;
+        width:90%;
+        text-align:left;
+
+    }
+
 </style>
 <!-- carousel-->
 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
@@ -25,7 +33,7 @@
       <img class="d-block w-100" src="{{carousel.img.url}}" alt="{{carousel.alt}}">
         <div class="carousel-caption d-none d-md-block">
 
-    <h1 style="color:red">{{carousel.des}}</h1>
+    <h1 style="color:blue">{{carousel.des}}</h1>
     <p>...</p>
   </div>
      </div>
@@ -211,7 +219,37 @@
 </center>
                         </div>
             </div></div></div>
-    <!-- end contact -->
+
+<form method="POST">
+    {%csrf_token%}
+    {{remark.as_p}}
+</form>
+<center>
+    <div class="row" id="infodown" >
+        <div class="container">
+         <h4>
+             Hollymab: Online Shopping in Lagos | No. 1 Shopping Destination in Badagry
+         </h4>
+        <p style="border-radius: 5px;">
+            Hollymab is your best online shopping site in Lagos-Badagry. We are an online store where you can purchase all your phones - android and iOS. What more? We can have them delivered directly to you within the vicinity of Badagry. Whatever it is you wish to buy, Hollymab offers you all and lots more at prices which you can trust. Hollymab has payment options for everyone irrespective of class and preferences. Here, you also have the option to make your payment on delivery for extra convenience. Shopping online in Lagos(Badagry) is easy and convenient with Hollymab. We provide you with a wide range of products you can rely on. Take part in the deals of the day and discover the best prices on a wide range of products.
+        </p>
+
+        <p>
+            Official Stores  is here! You can now shop several genuine & 100% Authentic products from Top Brands: Samsung, Apple, Nokia , Techno, Itel , Infinix, Xiaomi, Oppo, Fero and more shipped to you directly from official distributors with full warranty and returns available up to 7 days.
+        </p>
+
+        <h4>
+            Buy Mobile Phones, Appliances & more on Hollymab
+        </h4>
+
+        <p>
+            Hollymab Nigeria offers the latest innovative mobile phones such as  Samsung A51 , Samsung S20 Samsung S20, Samsung S20 Plus, Ultra Gionee M11, Tecno Spark 4, Tecno Camon 12, Tecno Camon 12 Pro, Samsung A30, Infinix Hot 8, Nokia 7.2, Xiaomi Note 10 Pro, iPhone 11, iPhone 11 Pro Max (Currently Refurbish iPhones), Huawei Y9s, Samsung S9, as well as the latest Samsung S10 series , Samsung Note 10 & 10+, Samsung Note 10 Lite, Samsung A71, Samsung S20 Phones, Samsung S20, Tecno Camon 15, Samsung S20 Plus, Samsung S20 Ultra  and more. <!--Also take advantage of computing products available to own laptops like the Dell Inspiron, printers and other storage devices such as hard drives at affordable prices. Get Professional Services online like insurance services, medical services, IT Training, educational services and so much more.-->
+        </p>
+    </div>
+    </div>
+
+    </div></center><br>
+<!-- end contact -->
 
     <!-- footer -->
 {%endblock%}

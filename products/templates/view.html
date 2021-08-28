@@ -25,6 +25,7 @@
                             <img src="{{item.img_url}}" height="400px; width:500px">
                         </div>
          <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 margin">
+                                     <button class="btn btn-warning"><a style="font-family:sans-serif" href="{%url 'login'%}"><img src="{%static 'images/cart.png'%}" style="height:30px; width:30px">Add to cart</a> </button>
 
              <h5><b style="color:black">Price:</b></h5>
             <p>
@@ -35,7 +36,7 @@
              {{item.price}}
                                 {%endif%}
 
-         <h1>{{item.name}}</h1>  <h4>{{item.body|safe}}</h4>                      </div>
+             <h1>{{item.name}}</h1> <div class="container"> <h4>{{item.body|safe}}</h4>   </div>                   </div>
 
 </div>
 {%endif%}

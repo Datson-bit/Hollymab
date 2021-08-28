@@ -5,7 +5,9 @@
 {%block content%}
 {%load static%}
 <style>
-
+#inp{
+    text-transform: capitalize;
+}
 </style>
 
 <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">-->
@@ -40,6 +42,10 @@
    <div class="brand-bg">
             <div class="container">
 
+<form class="form-group" action="{% url 'search_results' %}" method="get">
+  <input class="form-control" type="text" placeholder="Search" id="inp" name="searched" >
+    <button class="btn btn-primary"><i class="fas fa-search"> Search</i></button>
+</form>
                 <div class="row">
 
 {%for item in object_list%}
@@ -47,18 +53,21 @@
 
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 margin">
                         <div class="brand_box">
+
                             <img src="{{item.img_url}}" alt="img" />
-                            <h3>#<strong class="red">
+                            <a href="" style="position:relative;height:30px; width:70px; top:-150px;font-family:sans-serif;" class="badge badge-{{item.get_label_display}}"><h5>{{item.get_category_display}}</h5></a>
+                            <h3><img src="{%static 'images/download.png'%}" style="height:30px; width:30px;"><strong class="red">
                                 {%if item.discount%}
                                 {{item.discount}}
                                 {%else%}
                                 {{item.price}}
                                 {%endif%}
                             </strong></h3>
-                            <span>{{item.name}}</span>
+                            <span class="badge badge-pill {{item.get_label_display}}"></span>
+                            <span style="font-family:sans-serif">{{item.name}}</span>
 
 
-                            <button class="btn btn-primary"><a style="color:white" href="{%url 'view' item.pk%}">View </a></button>
+                            <button class="btn btn-primary"><a style="font-family:sans-serif;color:white" href="{%url 'view' item.pk%}">View </a></button>
 
                         </div>
                     </div>
@@ -67,6 +76,9 @@
                         </div></div>
 </center>
 
+       <script>
+           alert("if search, please use title case ")
 
+       </script>
 
 {%endblock%}

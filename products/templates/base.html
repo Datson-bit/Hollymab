@@ -48,6 +48,8 @@
     <link rel="stylesheet" href="{%static 'css/jquery.mCustomScrollbar.min.css'%}">
     <!-- Tweaks for older IEs-->
     <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+<!--font awesome    -->
+<link rel="stylesheet" href=" https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.3/css/fontawesome.min.css">
     <!-- owl stylesheets -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{% static 'css/owl.carousel.min.css'%}">
@@ -61,9 +63,7 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
 </head>
 <style>
-    nav{
-        background:red;
-    }
+
 </style>
 <body>
 {% if messages %}
@@ -78,7 +78,7 @@
         <div class="header" style="">
 
             <div  class="container">
-                <div class="row">
+                <div class="row"  style="">
                      <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col logo_section">
                         <div class="full">
                             <div class="center-desk">
@@ -98,14 +98,17 @@
                                         <li> <a href="{%url 'About'%}">About</a> </li>
                                         <li><a href="{%url 'products'%}">Products</a></li>
                                         <li><a href="{%url 'staff'%}">Staff</a></li>
+
                                         <li><a href="{%url 'logout'%}">Logout</a></li>
                                         <li><a href="{%url 'order-summary' %}"><img src="{%static 'images/cart.png'%}" style="height:50px; width:50px"/>{{request.user|cart_item_count}}</a></li>
+
                                         {%else%}
                                         <li class="active"> <a href="{%url 'Home'%}">Home</a> </li>
                                         <li> <a href="{%url 'About'%}">About</a> </li>
                                         <li><a href="{%url 'products'%}">Products</a></li>
                                         <li><a href="{%url 'staff'%}">Staff</a></li>
                                         <li><a href="{%url 'login'%}">Login</a></li>
+                                                                                <li><a href="{%url 'login' %}"><img src="{%static 'images/cart.png'%}" style="height:50px; width:50px"/>{{request.user|cart_item_count}}</a></li>
                                         <li><a class="btn btn-danger" href="{%url 'register'%}">Sign Up</a></li>
 {%endif%}
                                         <!--
@@ -122,7 +125,7 @@
                             <ul>
                                 <li><img src="{%static 'icon/call.png'%}" />(+234)8038134969</li>
                                 <li><img src="{%static 'icon/email.png'%}" />sales@hollymab.com</li>
-                                <li><a href="http://www.google.com/maps/place/6.427296,2.889547"><img src="{%static 'icon/loc.png'%}" />Location</a></li>
+                                <li><a href="http://www.google.com/maps/place/6.427296,2.889547"><img src="{%static 'icon/loc.png'%}" style="color: white"/>Location</a></li>
                             </ul>
                         </div>
                     </div>
@@ -161,6 +164,8 @@
                                     <li> <a href="{%url 'products'%}">Products </a></li>
                                     <li> <a href="{%url 'staff'%}">staff  </a></li>
                                     <li> <a href="{%url 'Contact'%}"> Contact us</a></li>
+                                                                        <li> <a href="{%url 'privacy'%}">Privacy  </a></li>
+                                    <li> <a href="{%url 'terms'%}">Terms and Conditions  </a></li>
                                 </ul>
                             </div>
                         </div>

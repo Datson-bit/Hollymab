@@ -40,7 +40,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'products',
     'account',
-    'ckeditor'
+    'ckeditor',
+    'django_countries',
+    'crispy_forms',
+
 ]
 
 MIDDLEWARE = [
@@ -124,7 +127,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
-LOGIN_REDIRECT_URL = 'Home'
+LOGIN_REDIRECT_URL = 'order-summary'
 LOGOUT_REDIRECT_URL = 'Home'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -139,3 +142,9 @@ STATICFILES_DIR = [
 ]
 
 django_heroku.settings(locals())
+
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+
+PAYSTACK_SECRET_KEY = 'sk_test_a5d39f3ba176c7ec3b5fda58962f0eafe9e80b7b'
+PAYSTACK_PUBLIC_KEY = 'pk_test_0c00e9c50e2a716afd94efe697093653c2750c7d'
+

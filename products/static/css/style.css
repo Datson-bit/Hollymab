@@ -291,7 +291,7 @@ button {
 }
 
 .main_bt {
-     background: #ee580f;
+     background: #0000ff;
      color: #fff;
      padding: 15px 60px 15px 60px;
      float: left;
@@ -438,7 +438,7 @@ a.readmore_bt {
 .header {
      font-family: poppins;
      padding: 10px 0px;
-     background: url(../images/hea.png);
+     background: url(../images/hea1.png);
      background-repeat: no-repeat;
 background-size: 100% 100%;
 background-position: center center;
@@ -1691,11 +1691,11 @@ text-align: center;
 line-height: 40px;
 border-radius: 100%;
 font-size: 18px;
-} 
+}
 
 ul.social_icon li a:hover {
      background: #ff0000;
-border: solid #ff0000 1px;        
+border: solid #ff0000 1px;
 color: #fff;
 }
 /** end banner **/
@@ -1736,7 +1736,7 @@ color: #fff;
      font-weight: bold;
      font-size: 50px;
      line-height: 58px;
-     color:#23242a; 
+     color:#23242a;
      padding-bottom: 10px;
 display: block
 }
@@ -1751,7 +1751,7 @@ display: block
      font-weight: bold;
      font-size: 50px;
      line-height: 58px;
-     color:#23242a; 
+     color:#23242a;
      padding-bottom: 10px;
 display: block
 }
@@ -1769,7 +1769,7 @@ display: block
 .clients {
      background: #fff;
      padding: 60px 0px;
-} 
+}
 .clients .titlepage {padding-bottom: 0px;}
 .clients .titlepage h2 {
      color: #000;
@@ -1779,7 +1779,7 @@ display: block
      background: #ff0000;
      padding-top: 90px;
      padding-bottom:110px;
-} 
+}
 
 .testimonial_cont p {color: #030000;}
 #testimonial_slider .carousel-indicators {
@@ -1811,7 +1811,7 @@ border-radius: 50px;
 }
 .testimonial_cont {
     background: #fff;
-   
+
     padding-top: 60px;
     min-height: 295px;
     padding-left: 80px;
@@ -1828,7 +1828,7 @@ border-radius: 50px;
 .testimonial_cont h3 { color: #000; font-family: poppins;}
 
 
-     
+
 
 
 
@@ -1877,12 +1877,12 @@ border-radius: 50px;
      font-size: 16px;
 line-height: 16px;
 padding-bottom: 3px;
-} 
+}
 .brand-bg .brand_box i {
      padding: 0px 2px;
 }
 
-.read-more { 
+.read-more {
 font-family: poppins;
 max-width: 212px;
 margin: 0 auto;
@@ -1925,7 +1925,7 @@ margin-top: 40px
      background: #fff;
     box-shadow: #ddd 0px 0px 19px 1px;
     padding: 40px;
-} 
+}
 
 .form-control {
      border: #ff0000 solid 2px;
@@ -1946,7 +1946,7 @@ margin-top: 40px
      padding: 13px 20px;
      width: 100%;
      padding-top: 40px;
-} 
+}
 
 .send {
      font-family: poppins;
@@ -1975,7 +1975,7 @@ margin-top: 40px
      font-family: poppins;
 }
 .footer .headinga h3 {
-     
+
      font-size: 38px;
     display: block;
     color: #fff;
@@ -1989,7 +1989,7 @@ margin-top: 40px
 
 }
 .footer .headinga span {
-     
+
      font-size: 17px;
      display: block;
      color: #fff;
@@ -1997,7 +1997,7 @@ margin-top: 40px
      padding-bottom: 5px;
 }
 .footer .headinga p {
-     
+
      font-size: 17px;
      display: block;
      color: #fff;
@@ -2006,13 +2006,13 @@ margin-top: 40px
 ul.link li {
      display: inline-block;
      padding: 8px 15px;
-     
-     
+
+
 }
 ul.link li a {
      color: #fff;
      font-size: 17px;
-     
+
 }
 ul.link li a:hover {
      color: #ff0000;
@@ -2047,11 +2047,11 @@ text-align: center;
 line-height: 40px;
 border-radius: 100%;
 font-size: 18px;
-} 
+}
 
 ul.location_icon li a:hover {
      background: #ff0000;
-border: solid #ff0000 1px;        
+border: solid #ff0000 1px;
 color: #fff;
 }
 
