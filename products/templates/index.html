@@ -1,5 +1,6 @@
 {%extends 'base.html'%}
 {%block content%}
+        {%load crispy_forms_tags%}
 {%load static%}
 <style>
 <!--    @media only screen and (max-width:480){-->
@@ -220,9 +221,14 @@
                         </div>
             </div></div></div>
 
-<form method="POST">
+<form class="form-group container" action="." method="POST">
     {%csrf_token%}
-    {{remark.as_p}}
+
+<div id="div_id_title" class="control-group error"> <label for="id_title" class="control-label form-label requiredField">
+                Title<span class="asteriskField">*</span> </label> <div class="controls"> <input class="form-control" type="text" name="title" maxlength="100" class="textinput textInput" required id="id_title"> <p id="error_1_id_title" class="help-block"><strong>This field is required.</strong></p> </div> </div> <div id="div_id_body" class="control-group error"> <label for="id_body" class="control-label form-label requiredField">
+                Body<span class="asteriskField">*</span> </label> <div class="controls"> <textarea class="form-control"name="body" cols="40" rows="10" class="textarea" required id="id_body">
+</textarea> <p id="error_1_id_body" class="help-block"><strong>This field is required.</strong></p> </div> </div>
+    <button class="btn btn-primary">Post Remark</button>
 </form>
 <center>
     <div class="row" id="infodown" >

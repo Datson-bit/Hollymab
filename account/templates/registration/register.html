@@ -1,8 +1,8 @@
 {%extends 'base.html'%}
+{%load crispy_forms_tags%}
 {%block content%}
     <style>
     input{
-    border: 2px solid green;
     }
     span{
         color:red;
@@ -36,9 +36,10 @@
         {% csrf_token%}
 
 <div id="div_id_username" class="control-group"> <label for="id_username" class="control-label requiredField">
-                Username<span class="asteriskField">*</span> </label> <div class="controls"> <input class="form-control"type="text" name="username" maxlength="150" autocapitalize="none" autocomplete="username" autofocus class="textinput textInput" required id="id_username"> <p id="hint_id_username" class="help-block">Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</p> </div> </div> <div id="div_id_password1" class="control-group"> <label for="id_password1" class="control-label requiredField">
-                Password<span class="asteriskField">*</span> </label> <div class="controls"> <input type="password" class="form-control"name="password1" autocomplete="new-password" class="textinput textInput" required id="id_password1"> <p id="hint_id_password1" class="help-block"><ul><li>Your password can’t be too similar to your other personal information.</li><li>Your password must contain at least 8 characters.</li><li>Your password can’t be a commonly used password.</li><li>Your password can’t be entirely numeric.</li></ul></p> </div> </div> <div id="div_id_password2" class="control-group"> <label for="id_password2" class="control-label requiredField">
-                Password confirmation<span class="asteriskField">*</span> </label> <div class="controls"> <input class="form-control"type="password" cass="form-control"name="password2" autocomplete="new-password" class="textinput textInput" required id="id_password2"> <p id="hint_id_password2" class="help-block">Enter the same password as before, for verification.</p> </div> </div>
+                Username<span class="asteriskField">*</span> </label> <div class="controls"> <input type="text" name="username" maxlength="150" autocapitalize="none" autocomplete="username" autofocus class="textinput form-control textInput" required id="id_username"> <p id="hint_id_username" class="help-block">Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.</p> </div> </div> <div id="div_id_password1" class="control-group"> <label for="id_password1" class="control-label requiredField">
+                Password<span class="asteriskField">*</span> </label> <div class="controls"> <input type="password" name="password1" autocomplete="new-password" class="textinput textInput form-control" required id="id_password1"> <p id="hint_id_password1" class="help-block"><ul><li>Your password can’t be too similar to your other personal information.</li><li>Your password must contain at least 8 characters.</li><li>Your password can’t be a commonly used password.</li><li>Your password can’t be entirely numeric.</li></ul></p> </div> </div> <div id="div_id_password2" class="control-group"> <label for="id_password2" class="control-label requiredField">
+                Password confirmation<span class="asteriskField">*</span> </label> <div class="controls"> <input type="password" name="password2" autocomplete="new-password" class="textinput textInput form-control" required id="id_password2"> <p id="hint_id_password2" class="help-block">Enter the same password as before, for verification.</p> </div> </div> <div id="div_id_email" class="control-group"> <label for="id_email" class="control-label requiredField">
+                Email<span class="asteriskField">*</span> </label> <div class="controls"> <input type="email" name="email" class="emailinput form-control"required id="id_email"> </div> </div>
          <button class="btn btn-primary">Register</button>
     </form>
 

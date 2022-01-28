@@ -9,7 +9,7 @@ from django.utils import timezone
 from django.views.generic import ListView,View, DetailView, CreateView
 
 from . import forms
-from .forms import CheckoutForm, PaymentForm
+from .forms import CheckoutForm, PaymentForm, RemarkForm
 from .models import Product, Item, OrderItem, Staff, Carousel, Order, BillingAddress, Payment
 from django.core.mail import send_mail, BadHeaderError
 from django.http import HttpResponse, HttpResponseRedirect, HttpRequest
@@ -19,14 +19,17 @@ from django.conf import settings
 
 def Home(request):
     if request.method == "POST":
-        remark_form= forms.RemarkForm(request.POST, user=request.user)
+        remark_form= forms.RemarkForm(request.POST, request.user)
+        remark_form.get(user=request.user)
         if remark_form.is_valid():
             remark= remark_form.save()
-        return render(request, 'index.html', {'remark': remark})
+            messages.success("Remark Posted Successfully")
+            return render(request, 'index.html', {'remark': remark})
     else:
         product = Product.objects.all()
+        remark_form = RemarkForm(request.POST, request.user)
         carousel= Carousel.objects.all()
-        return render(request, 'index.html', {'product': product, 'carousel':carousel })
+        return render(request, 'index.html', {'product': product, 'carousel':carousel, 'remark':remark_form })
 
 
 def initiate_payment(request: HttpRequest) -> HttpResponse:
@@ -100,7 +103,7 @@ def contact(request):
         message_email = request.POST['message-email']
         message = request.POST['message']
 
-        send_mail(message_name, message, message_email,['dulmzonecoders@gmail.com'])
+        send_mail(message_name, message, message_email,[settings.EMAIL_HOST_USER])
         return render(request, 'contact.html', {'message_name': message_name})
 
     else:
@@ -158,8 +161,8 @@ class OrderSummaryView(LoginRequiredMixin, View):
            return redirect("/")
 
 @login_required
-def add_to_cart(request, pk):
-    item = get_object_or_404(Item, pk=pk)
+def add_to_cart(request, slug):
+    item = get_object_or_404(Item, id=slug)
     order_item, created = OrderItem.objects.get_or_create(
         item=item,
         user= request.user,
@@ -168,7 +171,7 @@ def add_to_cart(request, pk):
     order_qs= Order.objects.filter(user=request.user, ordered=False )
     if order_qs.exists():
         order = order_qs[0]
-        if order.items.filter(item_id= item.pk).exists():
+        if order.items.filter(item_id= item.slug).exists():
             order_item.quantity += 1
             order_item.save()
             messages.info(request, "This Item quantity was updated.")
@@ -182,7 +185,7 @@ def add_to_cart(request, pk):
         order.items.add(order_item)
         messages.info(request, "This Item was added to your cart.")
 
-    return redirect("view", pk=pk)
+    return redirect("view", id=slug)
 
 @login_required
 def remove_from_cart(request, pk):

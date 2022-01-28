@@ -1,17 +1,22 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<h1>Create a New BlogPost</h1>
-    <form method="POST" enctype="multipart/form-data">
-    {%csrf_token%}
-    {{form.media}}
-        {{form.as_p}}
-        <button>Post</button>
-    </form>
-</body>
+{%extends 'base.html'%}
+{%block content%}
+<div class="container">
+<br><br>
+<h2>Hi, {{user.get_username}}</h2>
+<hr>
+    <h3>Welcome to your dashboard</h3>
+<br><br>
+<div class="row">
+    <div class="col-sm-4">
+        <button class=" btn btn-secondary" style="height:100px; width:200px"><a style="color:white" href="{%url 'order-summary'%}">My Cart</a></button>
+    </div>
+    <div class="col-sm-4">
+        <button class=" btn btn-secondary" style="height:100px; width:200px"><a style="color:white" href="{%url 'products'%}">View Products</a></button>
+    </div>
+    <div class="col-sm-4">
+    <button class=" btn btn-secondary" style="height:100px; width:200px">Edit</button>
+    </div>
 
-</html>
+    </div><br>
+</div>
+    {%endblock%}

@@ -50,7 +50,6 @@
 
 {%for item in object_list%}
 
-
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 margin">
                         <div class="brand_box">
 
@@ -67,7 +66,7 @@
                             <span style="font-family:sans-serif">{{item.name}}</span>
 
 
-                            <button class="btn btn-primary"><a style="font-family:sans-serif;color:white" href="{%url 'view' item.pk%}">View </a></button>
+                            <button class="btn btn-primary"><a style="font-family:sans-serif;color:white" href="{%url 'view' item.slug%}">View </a></button>
 
                         </div>
                     </div>

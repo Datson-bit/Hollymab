@@ -4,66 +4,67 @@
     <meta charset="UTF-8">
     <title>Hollymab</title>
      {%load static%}
+        {%load crispy_forms_tags%}
     <link rel="stylesheet" href="{%static 'css/bootstrap.min.css'%}">
         <link style="width: 70px" rel="icon" href="{%static 'images/mab.png'%}">
 
     <script src="{%static 'js/bootstrap.min.js'%}"></script>
-    <style>
-        input{
-             height: 30px;
-            padding: 3px;
-            width: 300px;
-            border: 1.6px solid whitesmoke;
-            border-radius: 3px;
-        }
-         #btn{
-            height: 40px;
-            width: 300px;
-            font-size: 15px;
-            border: none;
-            background-color: #2121fd;
-            color:white;
-            border-radius: 5px;
-        }
+<!--    <style>-->
+<!--        input{-->
+<!--             height: 30px;-->
+<!--            padding: 3px;-->
+<!--            width: 300px;-->
+<!--            border: 1.6px solid whitesmoke;-->
+<!--            border-radius: 3px;-->
+<!--        }-->
+<!--         #btn{-->
+<!--            height: 40px;-->
+<!--            width: 300px;-->
+<!--            font-size: 15px;-->
+<!--            border: none;-->
+<!--            background-color: #2121fd;-->
+<!--            color:white;-->
+<!--            border-radius: 5px;-->
+<!--        }-->
 
-         #btn1{
-            height: 40px;
-            width: 200px;
-            font-size: 15px;
-            border: none;
-            position: absolute;
-            left:60px;
-            background-color: green;
-            color:white;
-            border-radius: 5px;
-        }
-            div{
-            position: absolute;
-            top: 200px;
-            left: 100px;
-        }
-        h1{
-            font-size: 50px;
-        }
-        h4{
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 20px;
-        }
-           form{
-            position: absolute;
-            background-color: white;
-            border-radius: 5px;
-            box-sizing: border-box;
-            box-shadow: 0 2px 4px rgb(239, 239, 240), 0 3px 6px rgb(236, 236, 236);
-            top: 30%;
-            left: 50%;
-            height: 320px;
-            width: 350px;
-            padding: 10px;
-        }
-    </style>
+<!--         #btn1{-->
+<!--            height: 40px;-->
+<!--            width: 200px;-->
+<!--            font-size: 15px;-->
+<!--            border: none;-->
+<!--            position: absolute;-->
+<!--            left:60px;-->
+<!--            background-color: green;-->
+<!--            color:white;-->
+<!--            border-radius: 5px;-->
+<!--        }-->
+<!--            div{-->
+<!--            position: absolute;-->
+<!--            top: 200px;-->
+<!--            left: 100px;-->
+<!--        }-->
+<!--        h1{-->
+<!--            font-size: 50px;-->
+<!--        }-->
+<!--        h4{-->
+<!--            font-family: Arial, Helvetica, sans-serif;-->
+<!--            font-size: 20px;-->
+<!--        }-->
+<!--           form{-->
+<!--            position: absolute;-->
+<!--            background-color: white;-->
+<!--            border-radius: 5px;-->
+<!--            box-sizing: border-box;-->
+<!--            box-shadow: 0 2px 4px rgb(239, 239, 240), 0 3px 6px rgb(236, 236, 236);-->
+<!--            top: 30%;-->
+<!--            left: 50%;-->
+<!--            height: 320px;-->
+<!--            width: 350px;-->
+<!--            padding: 10px;-->
+<!--        }-->
+<!--    </style>-->
 </head>
-<body class="container" style="background:whitesmoke">
+<body class="container" style="">
 {% if form.errors %}
     {% for field in form %}
         {% for error in field.errors %}
@@ -83,14 +84,18 @@
         <h1 style="font-family: Arial, Helvetica, sans-serif; color: red;">Hollymab</h1>
         <h4>Hollymab helps you access all mobile phones <br/> with the people in your life</h4>
         </div>
-<form method="POST" enctype="multipart/form-data">
+<form method="POST" class="form-group" enctype="multipart/form-data">
 {% csrf_token%}
 
-{{form.as_p}}
-    <button id="btn">Login</button>
+
+
+<div id="div_id_username" class="control-group"> <label for="id_username" class="control-label requiredField">
+                Username<span style="color:red" class="asteriskField">*</span> </label> <div class="controls"> <input class="form-control"type="text" name="username" autofocus autocapitalize="none" autocomplete="username" maxlength="150" class="textinput textInput" required id="id_username"> </div> </div> <div id="div_id_password" class="control-group"> <label for="id_password" class="control-label requiredField">
+                Password<span style="color:red" class="asteriskField">*</span> </label> <div class="controls"> <input class="form-control"type="password" name="password" autocomplete="current-password" class="textinput textInput" required id="id_password"> </div> </div>
+    <br><button class="btn btn-primary" id="btn">Login</button>
 
         <hr style="background: gray; border: 0.5px solid rgb(207, 207, 207);">
-    <br><button id="btn1"><a href="{%url 'register'%}" style="color:white">Create New Account</a></button>
+    <br><button id="btn1" class="btn btn-success"><a href="{%url 'register'%}"  style="color:white">Create New Account</a></button>
 
 </body>
 </html>

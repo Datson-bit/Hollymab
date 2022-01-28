@@ -5,7 +5,7 @@
 <div class="container">
     <div style="min-height:900vh" class="d-flex row justify-content-center align-items-content py-md-5 py-3">
         <div class="col-sm-12">
-            <h5>Make payment for: N{{payment.amount}}</h5>
+            <h5>Make payment for: N{{object.get_total}}</h5>
             <script src="https://js.paystack.co/v1/inline.js"></script>
                 <button  class="btn btn-large btn-success"onclick="payWithPayStack()" id="django-paystack-button">Make Payment</button>
 
@@ -20,7 +20,7 @@
         let obj = {
             key: "{{paystack_public_key}}",
             email: "{{payment.email}}",
-            amount: "{{payment.amount_value}}",
+            amount: "{{object.get_total}}",
             ref:ref,
             callback: function(response){
                 window.location.href = "{%url 'verify-payment' payment.ref%}";

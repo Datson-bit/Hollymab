@@ -56,14 +56,16 @@ class Item(models.Model):
     name = models.CharField(max_length=50)
     category= models.CharField(choices=CATEGORY_CHOICES, max_length=2, default="")
     label= models.CharField(choices=LABEL_CHOICES, max_length=1, default="")
+    slug = models.SlugField(default="")
 
-
+    class Meta:
+        ordering = ['category']
 
     def __str__(self):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('core:view', args=(str(self.id)))
+        return reverse('view', args=(str(self.slug)))
 
     def get_add_to_cart_url(self):
         return reverse('add-to-cart', args=(str(self.id)))
@@ -80,10 +82,14 @@ class Staff(models.Model):
 
 
 class OrderItem(models.Model):
-    user=models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user=models.ForeignKey(settings.AUTH_USER_MODEL, null=True ,on_delete=models.CASCADE)
     ordered = models.BooleanField(default=False)
-    item = models.ForeignKey(Item, on_delete=models.CASCADE)
+    item = models.ForeignKey(Item, on_delete=models.CASCADE, null=True)
     quantity= models.IntegerField(default=1)
+    ref = models.CharField(max_length=200)
+    email = models.EmailField()
+    verified = models.BooleanField(default=False)
+    date_created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return f"{self.quantity} of {self.item.name}"
@@ -101,6 +107,33 @@ class OrderItem(models.Model):
         if self.item.discount:
             return self.get_total_discount_item_price()
         return self.get_total_item_price()
+
+
+    class Meta:
+        ordering = ('-date_created',)
+
+    def save(self, *args, **kwargs) -> None:
+        while not self.ref:
+            ref = secrets.token_urlsafe(50)
+            object_with_similar_ref = Payment.objects.filter(ref=ref)
+            if not object_with_similar_ref:
+                self.ref = ref
+        super().save(*args, **kwargs)
+
+    def amount_value(self) -> int:
+        return self.get_final_price * 100 + 50000
+
+    def verify_payment(self):
+        paystack = PayStack()
+        status, result = paystack.verify_payment(self.ref, self.get_final_price)
+        if status:
+            if result['amount'] / 100 + 50000 == self.get_final_price:
+                self.verified = True
+            self.save()
+        if self.verified:
+            return True
+        return False
+
 
 class Order(models.Model):
     user= models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)

@@ -2,7 +2,7 @@ from django import forms
 from django_countries.fields import CountryField
 from django_countries.widgets import CountrySelectWidget
 
-from products.models import Payment, Remark
+from products.models import Payment, Remark, OrderItem
 
 PAYMENT_CHOICES=(
     ('S', 'Stripe'),
@@ -33,8 +33,8 @@ class CheckoutForm(forms.Form):
 
 class PaymentForm(forms.ModelForm):
     class Meta:
-        model = Payment
-        fields= ('amount','email')
+        model = OrderItem
+        fields= ('email',)
 
 
 class RemarkForm(forms.ModelForm):

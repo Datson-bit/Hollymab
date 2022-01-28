@@ -127,14 +127,14 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
-LOGIN_REDIRECT_URL = 'order-summary'
+LOGIN_REDIRECT_URL = 'dashboard'
 LOGOUT_REDIRECT_URL = 'Home'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'dulmzonecoders@gmail.com'
-EMAIL_HOST_PASSWORD = 'dulmzonecoders123'
+EMAIL_HOST_USER = 'codersdulmzone@gmail.com'
+EMAIL_HOST_PASSWORD = 'Datson123.'
 EMAIL_USE_TLS = True
 
 STATICFILES_DIR = [
